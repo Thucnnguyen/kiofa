@@ -1,0 +1,70 @@
+* {
+    font-family: 'nunito';
+}
+
+
+.login-container {
+    width: 400px;
+}
+
+.login-container .login-title {
+    font-size: 1.5rem;
+}
+
+.login-container .login-btn {
+    width: 200px;
+}
+
+.brand-icon {
+    color: #ee97a4 !important;
+
+}
+
+.brand-logo-full {
+    padding: 8px;
+    border-radius: 16px;
+    border-color: #e2d8de;
+    border-width: 1px;
+    background: #fff3fa;
+    border-style: solid;
+}
+
+.btn-pink {
+    background-color: #f1f1f1;
+    color: #555555 !important;
+    border-radius: 16px;
+    border-color: #e2d8de;
+    border-width: 1px;
+    background: #fff3fa;
+    border-style: solid;
+}
+
+.main-body {
+    padding-bottom: 6rem;
+}
+
+.product-detail-container {
+    background-image: linear-gradient(to right, rgb(255, 242, 242), rgb(255, 248, 247));
+    padding: 2rem;
+    margin: 2rem;
+}
+
+.promo-graphic-img {
+
+}
+
+.cart {
+    position: fixed;
+    background: #929292;
+    color: black;
+    bottom: 5rem;
+    right: 1rem;
+    z-index: 100;
+    font-size: 1.5rem;
+    width: 70px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
