@@ -15,7 +15,7 @@ body{
     background-color: #ddd6c5
 }
 .timeline{
-    padding: 4%;
+    padding-bottom: 2%;
     display: flex;
     justify-content: center;
 }
@@ -172,7 +172,6 @@ body{
     margin: 0 0.3125rem 0 0;
 }
 .sort-option{
-    cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
@@ -183,7 +182,8 @@ body{
     padding: 0 0.9375rem;
     background: #fff;
     line-height: 2.125rem;
-    margin-left: 38px
+    margin-left: 38px;
+    border: none;
 }
 .sort-option:hover{
     background: #999
@@ -192,7 +192,7 @@ body{
     position: fixed;
     background: #929292;
     color: black;
-    bottom: 135px;
+    bottom: 5rem;
     right: 1rem;
     z-index: 100;
     font-size: 1.5rem;
@@ -202,6 +202,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 0 0 .3rem .3rem;
 }
 .to-header-link:hover{
     color:#000
@@ -210,11 +211,15 @@ body{
     border-top: solid 2px #000;
     border-radius: 0 0 .3rem .3rem
 }
+.jump{
+    position: relative;
+    height: 20px;
+}
 .time-show{
     position: fixed;
     background: #929292;
     color: black;
-    bottom: 185px;
+    bottom: 8rem;
     right: 1rem;
     z-index: 100;
     font-size: 22px;
@@ -330,7 +335,7 @@ body{
 }
 .preview{
     position: relative;
-    margin: 75px 0;
+    margin: 75px 0 50px;
 }
 .preview-img-food{
     width: 90%;
@@ -407,7 +412,7 @@ body{
 .preview-intro-price{
     gap: 0.5rem;
     display: flex;
-    margin-top: 2.5rem;
+    margin-top: 52px;
     font-size: 20px;
     line-height: 1.75rem;
 }
@@ -445,28 +450,37 @@ body{
 .card-title{
     font-size: 25px;
     font-weight: bold;
-    position: absolute;
-    color: white;
-    background: #00000063;
-    padding: 10px;
-    top: 2rem;
+    color: black;
+    padding-top: 15px;
+    text-align: center;
 }
 .card-btn-big{
     display: inline-block;
     width: 100%;
-    height: 300px;
+    height: 200px;
 }
-.card-text{
+.card-price{
     font-weight: bold;
-    color: red;
-    display: flex;
-    justify-content: center;
-    font-size: 30px;
-    margin: 0;
+}
+.card-price-pre{
+    color: #7e7e7e;
+    font-weight: normal
+}
+.card-chef{
+    font-weight: bold;
+}
+.card-chef-pre{
+    color: #7e7e7e;
+    font-weight: normal
+}
+.pt-10{
+    padding-top: 10px
+}
+.ta-r{
+    text-align: right
 }
 .card{
     margin-bottom: 50px;
-    border-radius: 20px;
     border: none;
 }
 
@@ -492,10 +506,25 @@ body{
     color: white
 }
 .cart-btn{
-    padding: 0;
+    height: 35px;
+}
+.cart-btn-top{
+    padding: 10px;
     display: flex;
-    width: 34%;
+    width: 31%;
     height: 42px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 55px;
+    font-size: 19px;
+    margin-right: 86px
+}
+.icon-cart{
+    padding-right: 8px;
+    padding-top: 4px;
+}
+.icon-cart-top{
+    padding-right: 8px;
 }
 .dong-icon{
     margin-left: 5px;
@@ -509,8 +538,8 @@ body{
 }
 .card-img-big{
     width: 100%;
-    border-radius: 20px 20px 0 0;
     height: 100%;
+    border-radius: .25rem .25rem 0 0;
 }
 .card-img-small{
     width: 100%;
