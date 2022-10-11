@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="preview" >
+            <div class="preview">
                 <div class="preview-content">
                     <h1 class="preview-heading">
                         Cơm Mẹ Nấu
@@ -67,9 +67,9 @@
             </div>
             <div id="jump" class="jump"></div>
             <form action="<c:url value="/home/search.do"/>" class="search" id="search">
-                <div class="search-info" >
+                <div class="search-info">
                     <span class="search-logo"> <i class="fa fa-search"></i></span>
-                    <input class="search-bar"  placeholder="Nhập thông tin.." type="search" name="Search"
+                    <input oninput="searchAjax(this)" class="search-bar"  placeholder="Nhập thông tin.." type="search" name="Search"
                            value="${Search}"/>
                     <button class="search-btn" type="submit">
                         Tìm Kiếm
@@ -82,52 +82,62 @@
                         <div class="row">
                             <div class="timeline">
                                 <ul class="timeline-list">
-                                    <li class="timeline-item"><button class="timeline-btn">Thứ Hai</button></li>
-                                    <li class="timeline-item"><button class="timeline-btn">Thứ Ba</button></li>
-                                    <li class="timeline-item"><button class="timeline-btn">Thứ Tư</button></li>
-                                    <li class="timeline-item"><button class="timeline-btn">Thứ Năm</button></li>
-                                    <li class="timeline-item"><button class="timeline-btn">Thứ Sáu</button></li>
-                                    <li class="timeline-item"><button class="timeline-btn">Thứ Bảy</button></li>
-                                    <li class="timeline-item"><button class="timeline-btn">Chủ Nhật</button></li>
+                                    <li  class="timeline-item"><button value="${dayOfWeek['Thu 2']}" onclick="getMealByDay(this)" class="timeline-btn">Thứ 2<br/>${dayOfWeek['Thu 2']}</button>
+                                    <li  class="timeline-item"><button value="${dayOfWeek['Thu 3']}" onclick="getMealByDay(this)" class="timeline-btn">Thứ 3<br/>${dayOfWeek['Thu 3']}</button>
+                                    <li  class="timeline-item"><button value="${dayOfWeek['Thu 4']}" onclick="getMealByDay(this)" class="timeline-btn">Thứ 4<br/>${dayOfWeek['Thu 4']}</button>
+                                    <li  class="timeline-item"><button value="${dayOfWeek['Thu 5']}" onclick="getMealByDay(this)"  class="timeline-btn">Thứ 5<br/>${dayOfWeek['Thu 5']}</button>
+                                    <li  class="timeline-item"><button value="${dayOfWeek['Thu 6']}" onclick="getMealByDay(this)" class="timeline-btn">Thứ 6<br/>${dayOfWeek['Thu 6']}</button>
+                                    <li  class="timeline-item"><button value="${dayOfWeek['Thu 7']}" onclick="getMealByDay(this)" class="timeline-btn">Thứ 7<br/>${dayOfWeek['Thu 7']}</button>
+                                    <li  class="timeline-item"><button value="${dayOfWeek['chu nhat']}" onclick="getMealByDay(this)" class="timeline-btn">Chủ nhật<br/>${dayOfWeek['chu nhat']}</button></li>
                                 </ul>
                             </div>
-                            <div class="sort">
-                                <span class="sort-bar-label">Lựa Chọn Khung Giờ</span>
-                                <button class="sort-option">11 - 13</button>
-                                <button class="sort-option">17 - 19</button>
-                            </div>
-                            <c:forEach items="${mealList}" var="meal">
-                                <div class="col l-4 c-12 m-6">
-                                    <div class="card">
-                                        <div class="card-top">
-                                            <a class="card-btn-big" href="<c:url value="/home/detail.do?productid=${meal.id}"/>">
-                                                <img src="${pageContext.request.contextPath}/images/${meal.images[0]}" class="card-img-big">
-                                            </a>
-                                            <h5 class="card-title">${meal.name}</h5>
-                                        </div>
-                                        <div class="card-body row">
-                                            <div class="col l-6">
-                                                <p class="card-price">
-                                                    <span class="card-price-pre">Từ</span>
-                                                    <fmt:formatNumber
-                                                        value="${meal.price}"
-                                                        pattern="#,### VND"/>
-                                                </p>
-                                            </div>  
-                                            <div class="col l-6 ta-r pt-10">
-                                                <button class="btn btn-outline-success cart-btn" onclick="addToCart(this)" value="${meal.id}">
-                                                    Xem Thêm
-                                                </button>
-                                            </div>
-                                            <p class="card-chef">
-                                                <span class="card-chef-pre">Đầu Bếp: </span>
-                                                Nguyễn Thị A
-                                            </p>
+                            <div id="show2" class="row">
 
-                                        </div>
-                                    </div>
-                                </div> 
-                            </c:forEach>
+                                <div class="sort">
+                                    <span class="sort-bar-label">Sắp Xếp Theo</span>
+                                    <c:forEach items="${session.timeline}" var="time">
+                                        <button value="${time.from}-${time.to}" class="sort-option" onclick="getMealBySession(this)">${time.from}-${time.to}</button>
+                                    </c:forEach>
+                                </div>
+                                <div id="show1" class="row">
+                                    <h1>${message}</h1>
+                                    <c:forEach items="${mealList}" var="meal">
+                                        <div class="col l-4 c-12 m-6">
+                                            <div class="card">
+                                                <div class="card-top">
+                                                    <a class="card-btn-big" href="<c:url value="/home/detail.do?mealId=${meal.id}"/>">
+                                                        <img src="${pageContext.request.contextPath}/images/${meal.images[0]}" class="card-img-big">
+                                                    </a>
+                                                    <h5 class="card-title">${meal.name}</h5>
+                                                </div>
+                                                <div class="card-body row">
+                                                    <div class="col l-6">
+                                                        <p class="card-price">
+                                                            <span class="card-price-pre">Từ</span>
+                                                            <fmt:formatNumber
+                                                                value="${meal.price}"
+                                                                pattern="#,### VND"/>
+                                                        </p>
+                                                    </div>  
+                                                    <div class="col l-6 ta-r pt-10">
+                                                        <button class="btn btn-outline-success cart-btn">
+                                                            <a href="<c:url value="/food/mealDetail.do?mealId=${meal.id}"/>"
+                                                               class="text-decoration-none cart-link">
+                                                                <i class="fa fa-cart-plus"></i>
+                                                                Xem Thông tin
+                                                            </a>
+                                                        </button>
+                                                    </div>
+                                                    <p class="card-chef">
+                                                        <span class="card-chef-pre">Đầu Bếp: </span>
+                                                        ${meal.chefId.name}
+                                                    </p>           
+                                                </div>
+                                            </div> 
+                                        </div>                  
+                                    </c:forEach>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -141,26 +151,96 @@
             <i id="up" class="fa-solid fa-arrow-up display-none"></i>
             <i id="down" class="fa-solid fa-arrow-down"></i>
         </a>   
-                    
-    </body>
-    <script>
-        const upBtn = document.getElementById("up");
-        const downBtn = document.getElementById("down");
 
-        downBtn.addEventListener("click", function () {
-            if (downBtn.classList.contains("display-none")) {
-                downBtn.classList.remove('display-none')
-                upBtn.classList.add('display-none')
-            }
-        })
-        window.addEventListener("scroll", function () {
-            if (window.pageYOffset >= 2180) {
-                downBtn.classList.add('display-none')
-                upBtn.classList.remove('display-none')
-            } else {
-                downBtn.classList.remove('display-none')
-                upBtn.classList.add('display-none')
-            }
-        })
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+                                            function getMealBySession(param) {
+                                                timeLine = param.value;
+                                                $.ajax({
+                                                    url: "/comMeNau/home/showMealByTimelineAjax.do",
+                                                    type: "get",
+                                                    data: {
+                                                        timeline: timeLine
+                                                    },
+                                                    success: function (data) {
+                                                        var row = document.getElementById("show1");
+                                                        row.innerHTML = data;
+                                                    },
+                                                    error: function () {
+                                                    }
+                                                });
+                                            }
+                                            function getMealByDay(param) {
+                                                day1 = param.value;
+                                                $.ajax({
+
+                                                    url: "/comMeNau/home/showMealbyDay.do",
+                                                    type: "get",
+                                                    data: {
+                                                        day1: day1
+                                                    },
+                                                    success: function (data) {
+                                                        var row = document.getElementById("show2");
+                                                        row.innerHTML = data;
+                                                    },
+                                                    error: function () {
+                                                    }
+                                                });
+                                            }
+                                            function searchAjax(param) {
+                                                txtSearch = param.value;
+                                                $.ajax({
+
+                                                    url: "/comMeNau/home/searchAjax.do",
+                                                    type: "get",
+                                                    data: {
+                                                        Search: txtSearch
+                                                    },
+                                                    success: function (data) {
+                                                        var row = document.getElementById("show1");
+                                                        row.innerHTML = data;
+                                                    },
+                                                    error: function () {
+                                                    }
+                                                });
+                                            }
+                                            function addToCart(param) {
+                                                mealId = param.value;
+                                                $.ajax({
+
+                                                    url: "/comMeNau/home/addToCart.do",
+                                                    type: "get",
+                                                    data: {
+                                                        mealId: mealId
+                                                    },
+                                                    success: function (data) {
+                                                        var row = document.getElementById("quantity");
+                                                        row.innerHTML = data;
+                                                    },
+                                                    error: function () {
+                                                    }
+                                                });
+                                            }
+
+                                            const upBtn = document.getElementById("up");
+                                            const downBtn = document.getElementById("down");
+
+                                            downBtn.addEventListener("click", function () {
+                                                if (downBtn.classList.contains("display-none")) {
+                                                    downBtn.classList.remove('display-none')
+                                                    upBtn.classList.add('display-none')
+                                                }
+                                            })
+                                            window.addEventListener("scroll", function () {
+                                                if (window.pageYOffset >= 2180) {
+                                                    downBtn.classList.add('display-none')
+                                                    upBtn.classList.remove('display-none')
+                                                } else {
+                                                    downBtn.classList.remove('display-none')
+                                                    upBtn.classList.add('display-none')
+                                                }
+                                            })
     </script>
 </html>
